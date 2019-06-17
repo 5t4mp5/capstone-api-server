@@ -8,13 +8,6 @@ router.put('/login', (req, res, next) => {
     .catch(next);
 });
 
-//get all users
-router.get('/', (req, res, next) => {
-  User.findAll()
-    .then(users => res.send(users))
-    .catch(next);
-});
-
 //get user by token
 router.get('/authed', (req, res, next) => {
   if (req.user) {
@@ -24,13 +17,6 @@ router.get('/authed', (req, res, next) => {
     err.status = 401;
     next(err);
   }
-});
-
-//get user by id
-router.get('/:id', (req, res, next) => {
-  User.findByPk(req.params.id)
-    .then(user => res.send(user))
-    .catch(next);
 });
 
 //create new user

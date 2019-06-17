@@ -34,26 +34,6 @@ describe('User Routes', () => {
     userData[1].email = faker.internet.email();
     userMap = await Promise.all(userData.map(user => User.create(user)));
   });
-  describe('GET api/users', () => {
-    it('sends all users', async () => {
-      const response = await agent.get('/api/users').expect(200);
-      expect(response.body).to.have.length.greaterThan(1);
-      expect(!!response.body.find(user => user.id === userMap[0].id)).to.equal(
-        true
-      );
-      expect(!!response.body.find(user => user.id === userMap[1].id)).to.equal(
-        true
-      );
-    });
-  });
-  describe('GET api/users/:id', () => {
-    it('sends a specific user by their id', async () => {
-      const response = await agent
-        .get(`/api/users/${userMap[1].id}`)
-        .expect(200);
-      expect(response.body.firstName).to.equal(userMap[1].firstName);
-    });
-  });
   describe('PUT /api/users/login', () => {
     it('can log a user in', async () => {
       const response = await agent.put(`/api/users/login`).send({
