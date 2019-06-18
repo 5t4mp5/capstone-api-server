@@ -21,20 +21,16 @@ router.get('/authed', (req, res, next) => {
 
 //create new user
 router.post('/', (req, res, next) => {
-  console.log('NEW USER', req.body);
   User.signUp(req.body)
     .then(token => res.send(token))
-    .catch(e => {
-      console.log('USER SIGNUP ERROR', e, req.body);
-      next(e);
-    });
+    .catch(next);
 });
 
 //get users relationships
-router.get('/:id/relationships', (req, res, next) => {
+router.get('/relationships', (req, res, next) => {
   Relationship.findAll({
     where: {
-      userId: req.params.id,
+      userId: req.user.id,
     },
   })
     .then(relationships => res.send(relationships))

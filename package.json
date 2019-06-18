@@ -6,7 +6,7 @@
     "postinstall": "npm run seed",
     "seed": "node ./db/seed.js",
     "seed:dev": " source .env; node -r dotenv/config ./db/seed",
-    "test": "node -r dotenv/config ./node_modules/mocha/bin/mocha ./tests/*/*.spec.js --watch"
+    "test": "node -r dotenv/config ./node_modules/mocha/bin/mocha ./tests/api/users.spec.js --watch"
   },
   "dependencies": {
     "bcrypt": "3.0.6",

@@ -86,14 +86,16 @@ socketServer.on('connect', async socket => {
   );
   //location request with a users object { target: [target user's id], requester: [requester's user id] }
   socket.on('request_loc', users => {
-    socketServer.to(users.target).emit('request_loc', users.requester);
+    socketServer
+      .to(users.target)
+      .emit('request_loc', { requester: users.requester });
     console.log('LOCATION REQUEST SOCKET EVENT', users.target, users.requester);
   });
   //location respond with the id of the user who requested it, and the coordinates in an object
   socket.on('response_location', response => {
     socketServer
       .to(response.requester)
-      .emit('response_location', response.coords);
+      .emit('response_location', { coords: response.coords });
     console.log(
       'LOCATION RESPONSE SOCKET EVENT',
       response.requester,
