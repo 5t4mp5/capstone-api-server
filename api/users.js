@@ -38,10 +38,10 @@ router.get('/relationships', (req, res, next) => {
 });
 
 //get relationships to a user
-router.get('/:id/relatives/relationships', (req, res, next) => {
+router.get('/relatives/relationships', (req, res, next) => {
   Relationship.findAll({
     where: {
-      RelationshipId: req.params.id,
+      RelationshipId: req.user.id,
     },
   })
     .then(relationships => res.send(relationships))

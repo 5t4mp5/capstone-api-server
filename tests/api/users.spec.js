@@ -125,4 +125,14 @@ describe('User Routes', () => {
       expect(relationships.length).to.equal(3);
     });
   });
+  describe('GET /relatives/relationships', () => {
+    it('Gets all the logged in users relatives relationships', async () => {
+      const token = await User.authenticate('janedoe@email.com', 'p@ssWord!2');
+      const response = await agent
+        .get('/api/users/relatives/relationships')
+        .set({ authorization: token });
+      const relationships = response.body;
+      expect(relationships.length).to.equal(3);
+    });
+  });
 });
